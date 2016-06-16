@@ -366,6 +366,12 @@ static int serial_pxa_startup(struct uart_port *port)
 
 	if (port->line == 3) /* HWUART */
 		up->mcr |= UART_MCR_AFE;
+	else if (port->line == 1)
+	{
+		printk("serial_pxa_startup: BTUART: add full auto-flowcontrol UART_MCR_AFE | UART_MCR_RTS\n");
+		up->mcr |= UART_MCR_AFE;
+		up->mcr |= UART_MCR_RTS;
+	}
 	else
 		up->mcr = 0;
 
